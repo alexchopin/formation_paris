@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 import todoHeader from './components/todoHeader.vue'
 import todoToggle from './components/todoToggle.vue'
 import todoCount from './components/todoCount.vue'
@@ -81,8 +83,19 @@ export default {
       }
     }
   },
+  created () {
+    this.getTodos()
+  },
   methods: {
-    pushTodo: function (todo) {
+    async getTodos () {
+      try {
+        var response = await axios.get('https://jsonplaceholder.typicode.com/todos')
+        this.todos = response.data
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    pushTodo (todo) {
       this.todos.push(todo)
     },
     deleteByID: function (id) {
