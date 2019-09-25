@@ -1,11 +1,9 @@
 <template>
   <div id="app">
-    test
 		<section class="todoapp">
 			<todo-header @save="pushTodo"></todo-header>
 			<section class="main">
-				<input id="toggle-all" v-model="toggleAll" class="toggle-all" type="checkbox">
-				<label for="toggle-all">Mark all as complete</label>
+        <todo-toggle v-model="toggleAll"/>
 				<ul class="todo-list">
 					<li class="todo" v-for="todo in filteredTodos" v-bind:key="todo.id" v-bind:class="{ completed: todo.completed, editing: editingTodo && editingTodo.id === todo.id }">
 						<div class="view">
@@ -33,6 +31,7 @@
 
 <script>
 import todoHeader from './components/todoHeader.vue'
+import todoToggle from './components/todoToggle.vue'
 import todoCount from './components/todoCount.vue'
 import todoFilters from './components/todoFilters.vue'
 
@@ -40,6 +39,7 @@ export default {
   name: 'todomvc',
   components: {
     todoHeader,
+    todoToggle,
     todoCount,
     todoFilters
   },
